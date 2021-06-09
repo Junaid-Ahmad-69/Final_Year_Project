@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'package:blood_with_visual_studio/receiver_submit_button_map_markers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,23 @@ class _homepage extends StatefulWidget {
 
 class __homepageState extends State<_homepage> {
   List<Marker> myMarker = [];
+  int _circleIdCounter = 1;
+  bool _isCircle = false;
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _currentPosition = CameraPosition(
     target: LatLng(31.6947462, 73.9923036),
     zoom: 7,
   );
+  Set<Circle> circles = Set.from([
+    Circle(
+      circleId: CircleId('1'),
+      center: LatLng(32.166351, 74.195900),
+      radius: 100000,
+      fillColor: Colors.redAccent.withOpacity(0.5),
+      strokeWidth: 3,
+      strokeColor: Colors.redAccent,
+    )
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +53,9 @@ class __homepageState extends State<_homepage> {
             "Blood Bank",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
               fontFamily: "Raleway-Regular",
+              color: Colors.white,
             ),
           ),
         ),
@@ -156,6 +169,7 @@ class __homepageState extends State<_homepage> {
                       onMapCreated: (GoogleMapController controller) {
                         _controller.complete();
                       },
+                      circles: circles,
                       markers: {
                         marker1Marker,
                         marker2Marker,

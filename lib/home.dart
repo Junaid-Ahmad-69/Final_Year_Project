@@ -45,12 +45,18 @@ class __homepageState extends State<_homepage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Blood Bank Donation App"),
+        title: Text(
+          "Blood Portal",
+          style: TextStyle(
+            fontSize: 20.0,
+            fontFamily: "Raleway-Regular",
+          ),
+        ),
       ),
       drawer: drawer_page(),
       body: Container(
         padding: EdgeInsets.only(
-          top: 80.0,
+          top: 120.0,
           left: 60.0,
         ),
         child: Column(
@@ -142,7 +148,7 @@ class __homepageState extends State<_homepage> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 90,
             ),
             Row(
               children: [
@@ -187,7 +193,7 @@ class __homepageState extends State<_homepage> {
                             style: BorderStyle.solid),
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     child: Image(
-                      image: AssetImage('images/thalassemia.png'),
+                      image: AssetImage('images/laboratory.png'),
                       color: Colors.white,
                     ),
                   ),
@@ -195,7 +201,7 @@ class __homepageState extends State<_homepage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => thalaViewmore(),
+                        builder: (context) => labortary(),
                       ),
                     );
                   },
@@ -222,7 +228,7 @@ class __homepageState extends State<_homepage> {
                 Container(
                   padding: EdgeInsets.only(top: 15.0, left: 0),
                   child: Text(
-                    "Thalassemia",
+                    "Laboratary",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
@@ -235,51 +241,51 @@ class __homepageState extends State<_homepage> {
             SizedBox(
               height: 40,
             ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 120),
-                    height: 120,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        border: Border.all(
-                            color: Colors.red,
-                            width: 20.0,
-                            style: BorderStyle.solid),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    child: Image(
-                      image: AssetImage('images/laboratory.png'),
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => labortary(),
+            /*Row(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 120),
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          border: Border.all(
+                              color: Colors.red,
+                              width: 20.0,
+                              style: BorderStyle.solid),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                      child: Image(
+                        image: AssetImage('images/laboratory.png'),
+                        color: Colors.white,
                       ),
-                    );
-                  },
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => labortary(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),*/
+            /*Container(
+                padding: EdgeInsets.only(
+                  top: 15.0,
+                  right: 50,
                 ),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                top: 15.0,
-                right: 50,
-              ),
-              child: Text(
-                "Laboratory",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
-                  color: Colors.red,
+                child: Text(
+                  "Laboratory",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                    color: Colors.red,
+                  ),
                 ),
-              ),
-            ),
+              ),*/
           ],
         ),
       ),

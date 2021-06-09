@@ -25,13 +25,30 @@ class _receiverState extends State<receiver> {
   String selectCity;
   String selectHospital;
   String hos2;
+  String blood;
+  List<String> selectblood = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'AB+',
+    'AB-',
+    'O+',
+    'O-',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Receiver'),
+        title: Text(
+          'Receiver',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontFamily: "Raleway-Regular",
+          ),
+        ),
         centerTitle: true,
       ),
       body: Center(
@@ -42,7 +59,7 @@ class _receiverState extends State<receiver> {
               padding: const EdgeInsets.only(top: 25.0),
               child: Container(
                 width: 210,
-                height: 70,
+                height: 60,
                 padding: EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
                   color: Colors.red,
@@ -63,7 +80,7 @@ class _receiverState extends State<receiver> {
                         //fontWeight: FontWeight.bold,
                       ),
                     ),
-                    dropdownColor: Colors.grey,
+                    dropdownColor: Colors.grey.shade500,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: Colors.white,
@@ -105,10 +122,10 @@ class _receiverState extends State<receiver> {
 
             // Province Dropdown
             Padding(
-              padding: const EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.only(top: 25.0),
               child: Container(
                 width: 210,
-                height: 70,
+                height: 60,
                 padding: EdgeInsets.all(
                   5.0,
                 ),
@@ -130,7 +147,7 @@ class _receiverState extends State<receiver> {
                         fontSize: 18.0,
                       ),
                     ),
-                    dropdownColor: Colors.grey,
+                    dropdownColor: Colors.grey.shade500,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: Colors.white,
@@ -159,9 +176,63 @@ class _receiverState extends State<receiver> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0),
+              child: Container(
+                width: 210,
+                height: 60,
+                padding: EdgeInsets.all(
+                  5.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                    width: 1,
+                  ),
+                  //borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    hint: Text(
+                      'Select Blood',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    dropdownColor: Colors.grey.shade500,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white,
+                    ),
+                    iconSize: 30.0,
+                    value: blood,
+                    items: selectblood.map((String dropDownStringItem) {
+                      return DropdownMenuItem<String>(
+                        value: dropDownStringItem,
+                        child: Text(
+                          dropDownStringItem,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String newvalueblood) {
+                      setState(() {
+                        this.blood = newvalueblood;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
             // ignore: deprecated_member_use
             Container(
-              width: 290,
+              width: 280,
               child: Padding(
                 padding: const EdgeInsets.all(40.0),
                 // ignore: deprecated_member_use

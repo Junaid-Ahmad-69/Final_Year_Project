@@ -35,7 +35,9 @@ class _LoginState extends State<Login> {
                   controller: emailController,
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Please enter email";
+                      return "Please Enter Email";
+                    } else {
+                      return null;
                     }
                   },
                   decoration: InputDecoration(
@@ -61,7 +63,9 @@ class _LoginState extends State<Login> {
                 child: TextFormField(
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Please enter password";
+                      return "Please Enter Password";
+                    } else {
+                      return null;
                     }
                   },
                   decoration: InputDecoration(
@@ -87,14 +91,16 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 5, right: 240),
-                child: Text("Forget Password?"),
+                padding: const EdgeInsets.only(top: 10, right: 240),
+                child: Text(
+                  "Forget Password?",
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 25),
                 child: SizedBox(
-                  width: 355,
-                  height: 60,
+                  width: 360,
+                  height: 50,
                   // ignore: deprecated_member_use
                   child: RaisedButton(
                     onPressed: () {
@@ -105,8 +111,11 @@ class _LoginState extends State<Login> {
                     },
                     color: Colors.red,
                     child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white),
+                      "LOG IN",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),

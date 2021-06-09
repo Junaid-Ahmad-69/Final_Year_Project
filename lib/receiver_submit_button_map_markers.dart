@@ -46,6 +46,7 @@ class _homepageState extends State<homepage> {
             "Receiver Location",
             style: TextStyle(
               fontSize: 20.0,
+              fontFamily: "Raleway-Regular",
               color: Colors.white,
             ),
           ),

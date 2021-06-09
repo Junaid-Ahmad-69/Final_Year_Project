@@ -28,12 +28,14 @@ class _DonorState extends State<Donor> {
                     "Are You Sure To Exit ?",
                   ),
                   actions: [
+                    // ignore: deprecated_member_use
                     FlatButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
                       child: Text("Yes"),
                     ),
+                    // ignore: deprecated_member_use
                     FlatButton(
                       onPressed: () {
                         Navigator.of(context).pop(false);

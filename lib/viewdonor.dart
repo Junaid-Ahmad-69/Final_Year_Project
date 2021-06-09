@@ -59,8 +59,8 @@ class _homepageState extends State<homepage> {
           child: Text(
             "Donor",
             style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              fontFamily: "Raleway-Regular",
               color: Colors.white,
             ),
           ),

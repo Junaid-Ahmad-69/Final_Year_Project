@@ -114,8 +114,8 @@ class __homepageState extends State<_homepage> {
             "Blood Bank",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              fontFamily: "Raleway-Regular",
               color: Colors.white,
             ),
           ),

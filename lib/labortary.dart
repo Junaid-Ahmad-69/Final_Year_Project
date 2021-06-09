@@ -39,11 +39,10 @@ class __homepageState extends State<_homepage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            "Blood Bank",
+            "Laboratory",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
               fontFamily: "Raleway-Regular",
             ),
           ),

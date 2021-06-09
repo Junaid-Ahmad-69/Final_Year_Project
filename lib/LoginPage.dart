@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,8 +16,72 @@ class _LoginState extends State<LoginPage> {
 
   var _formKey = GlobalKey<FormState>();
   var confirmPass;
+
   //bool value = false;
-  final List<String> bloodGroup = ['A+', 'A', 'B+', 'B', 'O+', 'O-'];
+  String blood;
+  final List<String> bloodGroup = [
+    'A+',
+    'O+',
+    'B+',
+    'AB+',
+    'A-',
+    'O-',
+    'B-',
+    'AB-',
+  ];
+  PickedFile imageFile;
+  final ImagePicker picker = ImagePicker();
+  Widget bottomSheet() {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: [
+          Text(
+            "Choose Profile photo.",
+            style: TextStyle(fontSize: 20),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // ignore: deprecated_member_use
+              FlatButton.icon(
+                icon: Icon(Icons.camera),
+                onPressed: () {
+                  takePhoto(ImageSource.camera);
+                },
+                label: Text("Camera"),
+              ),
+              // ignore: deprecated_member_use
+              FlatButton.icon(
+                icon: Icon(Icons.image),
+                onPressed: () {
+                  takePhoto(ImageSource.gallery);
+                },
+                label: Text("Gallery"),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await picker.getImage(
+      source: source,
+    );
+    setState(() {
+      imageFile = pickedFile;
+    });
+  }
 
   //get images => null;
   @override
@@ -28,14 +94,50 @@ class _LoginState extends State<LoginPage> {
           child: Column(
             children: <Widget>[
               Padding(
-                  padding: const EdgeInsets.only(top: 75, bottom: 15),
-                  child: getImageAsset()),
+                padding: const EdgeInsets.only(top: 75, bottom: 15),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 63,
+                      backgroundColor: Colors.red,
+                      child: CircleAvatar(
+                        backgroundImage: imageFile == null
+                            ? AssetImage(
+                                'images/person.png',
+                              )
+                            : FileImage(File(imageFile.path)),
+                        backgroundColor: Colors.white,
+                        maxRadius: 60.0,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => bottomSheet()),
+                          );
+                        },
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Colors.red,
+                          size: 28,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
                 child: TextFormField(
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Please enter name";
+                      return "Please Enter Name";
+                    } else {
+                      return null;
                     }
                   },
                   decoration: InputDecoration(
@@ -63,7 +165,7 @@ class _LoginState extends State<LoginPage> {
                   inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Please enter Mobile no";
+                      return "Please Enter Mobile No";
                     } else if (value.length == 10) {
                       return 'Enter Valid Number';
                     } else {
@@ -149,7 +251,7 @@ class _LoginState extends State<LoginPage> {
                           () => isPasswordVisible = !isPasswordVisible),
                     ),
 
-                    ///hintText: 'Aneeq naeem',
+                    ///hintText: 'Junaid Ahmad',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -165,7 +267,9 @@ class _LoginState extends State<LoginPage> {
                 child: TextFormField(
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Please enter your Location";
+                      return "Please Enter your Location";
+                    } else {
+                      return null;
                     }
                   },
                   decoration: InputDecoration(
@@ -188,10 +292,10 @@ class _LoginState extends State<LoginPage> {
               ),
               buildCheckbox(),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(18.0),
                 child: SizedBox(
-                  width: 355,
-                  height: 60,
+                  width: 360,
+                  height: 50,
                   // ignore: deprecated_member_use
                   child: RaisedButton(
                     onPressed: () {
@@ -202,8 +306,11 @@ class _LoginState extends State<LoginPage> {
                     },
                     color: Colors.red,
                     child: Text(
-                      "Sign up",
-                      style: TextStyle(color: Colors.white),
+                      "SIGN UP",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
@@ -216,6 +323,7 @@ class _LoginState extends State<LoginPage> {
   }
 
   Widget buildCheckbox() => ListTile(
+        contentPadding: EdgeInsets.only(top: 4.0),
         leading: Checkbox(
           value: value,
           onChanged: (value) {
@@ -223,6 +331,50 @@ class _LoginState extends State<LoginPage> {
               this.value = value;
             });
           },
+        ),
+        trailing: Padding(
+          padding: const EdgeInsets.only(top: 13.0),
+          child: Container(
+            margin: EdgeInsets.only(right: 130.0),
+            width: 140,
+            height: 35,
+            color: Colors.grey.shade300,
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                hint: Text(
+                  'Select Blood',
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontSize: 14.0,
+                  ),
+                ),
+                dropdownColor: Colors.grey.shade300,
+                icon: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.grey.shade600,
+                ),
+                iconSize: 30.0,
+                value: blood,
+                items: bloodGroup.map((String dropDownStringItem) {
+                  return DropdownMenuItem<String>(
+                    value: dropDownStringItem,
+                    child: Text(
+                      dropDownStringItem,
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String newvalueblood) {
+                  setState(() {
+                    this.blood = newvalueblood;
+                  });
+                },
+              ),
+            ),
+          ),
         ),
         title: Text(
           "As a Donor",

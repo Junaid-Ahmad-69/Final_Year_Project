@@ -1,5 +1,7 @@
+import 'package:blood_with_visual_studio/Status.dart';
 import 'package:flutter/material.dart';
 import 'Login.dart';
+import 'Status.dart';
 
 class drawer_page extends StatelessWidget {
   @override
@@ -40,6 +42,17 @@ class drawer_page extends StatelessWidget {
             customicon(Icons.person, 'Profile', () => {}),
             customicon(Icons.notifications, 'Notification', () => {}),
             customicon(Icons.settings, 'Setting', () => {}),
+            customicon(
+                Icons.assignment,
+                'Status',
+                () => {
+                      Navigator.push(
+                        (context),
+                        MaterialPageRoute(
+                          builder: (context) => Status(),
+                        ),
+                      ),
+                    }),
             customicon(
                 Icons.lock,
                 'Log Out/Sign Out',
